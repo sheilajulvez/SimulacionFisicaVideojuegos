@@ -185,3 +185,7 @@ PxShape* CreateShape(const PxGeometry& geo, const PxMaterial* mat)
 	PxShape* shape = gPhysics->createShape(geo, *mat);
 	return shape;
 }
+
+
+
+//RenderItem: shape, transform( pos 3D, rotacion quaternion), color( vec4 RGB y alpha )
