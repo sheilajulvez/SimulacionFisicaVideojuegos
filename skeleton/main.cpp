@@ -8,8 +8,8 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 #include "Particle.h"
-
 #include <iostream>
+#include <list>
 
 std::string display_text = "This is a test";
 
@@ -19,32 +19,32 @@ using namespace physx;
 PxDefaultAllocator		gAllocator;
 PxDefaultErrorCallback	gErrorCallback;
 
-PxFoundation*			gFoundation = NULL;
-PxPhysics*				gPhysics	= NULL;
+PxFoundation* gFoundation = NULL;
+PxPhysics* gPhysics = NULL;
 
 
-PxMaterial*				gMaterial	= NULL;
+PxMaterial* gMaterial = NULL;
 
-PxPvd*                  gPvd        = NULL;
+PxPvd* gPvd = NULL;
 
-PxDefaultCpuDispatcher*	gDispatcher = NULL;
-PxScene*				gScene      = NULL;
+PxDefaultCpuDispatcher* gDispatcher = NULL;
+PxScene* gScene = NULL;
 ContactReportCallback gContactReportCallback;
-Particle* p;
-
+std::list<Particle*>particulas;
+using namespace std;
+//std::vector<Particle*> particulas;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
-	//codigo de inicializacion, render items, al principio del programa
 	PX_UNUSED(interactive);
 
 	gFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, gAllocator, gErrorCallback);
 
 	gPvd = PxCreatePvd(*gFoundation);
 	PxPvdTransport* transport = PxDefaultPvdSocketTransportCreate(PVD_HOST, 5425, 10);
-	gPvd->connect(*transport,PxPvdInstrumentationFlag::eALL);
+	gPvd->connect(*transport, PxPvdInstrumentationFlag::eALL);
 
-	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(),true,gPvd);
+	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true, gPvd);
 
 	gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
 
@@ -56,7 +56,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	p = new Particle(Vector3{ 0,0,200 }, Vector3{ 0,0,0 });
+
 }
 
 
@@ -65,44 +65,64 @@ void initPhysics(bool interactive)
 // t: time passed since last call in milliseconds
 void stepPhysics(bool interactive, double t)
 {
-	
-	//en cada paso de simulación se entra en esta función,msi quieres que algo se mueva actualizas su posicion en cada paso
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
-	p->integrate(0);
+	list<Particle*>::iterator e = particulas.begin();
+	while (e != particulas.end()) {
+		auto aux = e;
+		++aux;
+		if ((*e)->gettimer() <= 3)(*e)->integrate(t);
+		else {  
+			delete *e;
+			particulas.remove(*e); 
+		
+			
+		}
+		e = aux;
+	}
 }
 
 // Function to clean data
 // Add custom code to the begining of the function
 void cleanupPhysics(bool interactive)
 {
-	//al salir, se limpia
 	PX_UNUSED(interactive);
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
 	gScene->release();
 	gDispatcher->release();
 	// -----------------------------------------------------
-	gPhysics->release();	
+	gPhysics->release();
 	PxPvdTransport* transport = gPvd->getTransport();
 	gPvd->release();
 	transport->release();
-	
+
 	gFoundation->release();
-	}
+}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
 {
-	//si pulsamos tecla, llama a este método, AWSD mueve la cámara
 	PX_UNUSED(camera);
 
-	switch(toupper(key))
+	switch (toupper(key))
 	{
-	//case 'B': break;
-	//case ' ':	break;
+	case 'F': {
+		//creacion de una partícula
+		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 30, Vector3(0, -5, 0), 2, Vector4{ 150 , 0, 50, 1 });
+		particulas.push_back(p);
+
+		break;
+	}
+	case 'G': {
+		//creacion de una partícula
+		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 3, Vector3(0, -5, 0), 2, Vector4{ 0 , 250, 0, 1 });
+		particulas.push_back(p);
+
+		break;
+	}
 	case ' ':
 	{
 		break;
@@ -119,7 +139,7 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 }
 
 
-int main(int, const char*const*)
+int main(int, const char* const*)
 {
 #ifndef OFFLINE_EXECUTION 
 	extern void renderLoop();
@@ -127,7 +147,7 @@ int main(int, const char*const*)
 #else
 	static const PxU32 frameCount = 100;
 	initPhysics(false);
-	for(PxU32 i=0; i<frameCount; i++)
+	for (PxU32 i = 0; i < frameCount; i++)
 		stepPhysics(false);
 	cleanupPhysics(false);
 #endif

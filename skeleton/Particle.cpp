@@ -1,8 +1,10 @@
 #include "Particle.h"
-Particle::Particle(Vector3 pos, Vector3 vel) {
+Particle::Particle(Vector3 pos, Vector3 vel, Vector3 aceler, int mas, Vector4 color):trans(pos) {
 	this->vel = vel;
-	trans.p = pos;
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(10)),&trans, Vector4{ 255,0,255,1 });
+	//trans.p = pos;
+	masa = mas;
+	acelera = aceler;
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(10)), &trans, color);
 	RegisterRenderItem(renderItem);
 }
 Particle::~Particle() {
@@ -10,6 +12,13 @@ Particle::~Particle() {
 
 }
 void Particle::integrate(double t) {
-	trans.p += vel;
+	timer += t;
+	vel += acelera * t;
+	vel *= pow(damping, t);
+	trans.p += vel * t;
 
+}
+
+float Particle::gettimer() {
+	return timer;
 }
