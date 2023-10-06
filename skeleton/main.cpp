@@ -77,8 +77,6 @@ void stepPhysics(bool interactive, double t)
 		else {  
 			delete *e;
 			particulas.remove(*e); 
-		
-			
 		}
 		e = aux;
 	}
@@ -111,14 +109,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'F': {
 		//creacion de una partícula
-		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 30, Vector3(0, -5, 0), 2, Vector4{ 150 , 0, 50, 1 });
+		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 50, Vector3(0, -5, 0), 2, Vector4{ 150 , 0, 50, 1 });
 		particulas.push_back(p);
 
 		break;
 	}
 	case 'G': {
 		//creacion de una partícula
-		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 3, Vector3(0, -5, 0), 2, Vector4{ 0 , 250, 0, 1 });
+		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 30, Vector3(0, -5, 0), 2, Vector4{ 0 , 250, 0, 1 });
 		particulas.push_back(p);
 
 		break;

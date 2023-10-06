@@ -5,7 +5,6 @@ Particle::Particle(Vector3 pos, Vector3 vel, Vector3 aceler, int mas, Vector4 co
 	masa = mas;
 	acelera = aceler;
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(10)), &trans, color);
-	RegisterRenderItem(renderItem);
 }
 Particle::~Particle() {
 	DeregisterRenderItem(renderItem);
