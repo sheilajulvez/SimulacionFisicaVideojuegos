@@ -9,7 +9,7 @@ FireWork::~FireWork() {
 // The firework generates more fireworks when exploding --> they should be gathered by the System
 std::list<Particle*> FireWork::explode() {
 	_gens.front()->setOrigin(trans.p);	
-	_gens.front()->setMeanVelocity(vel);
+	_gens.front()->setMeanVelocity(Vector3{ vel.x,0,vel.z });
 
 	return _gens.front()->generateParticles(_type);
 }

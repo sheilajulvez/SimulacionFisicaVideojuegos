@@ -1,6 +1,8 @@
 #pragma once
-#include "SimpleGeneratorParticle.h"
+
 #include "GeneratorParticle.h"
+#include "ForceGenerator.h"
+#include "ParticleForceRegistry.h"
 #include "FireWork.h"
 class SystemParticle
 {
@@ -17,11 +19,14 @@ public :
 		GeneratorParticle* getParticleGenerator(const std::string& n);
 protected:
 	std::list <Particle*> _particles;
-
-	FireWork* firework;
-	
 	std::list <GeneratorParticle*> _particle_generators; // These are the registred generators(for on demand set generation prob.to 0
+	std::list<ForceGenerator*> _force_generators;
+	FireWork* firework;
+	ParticleForceRegistry* particleforceregistry;
+	
+	
 	GeneratorParticle* _firework_generator; // This generator is only to shoot the firework!!
+	ForceGenerator* force_generator;
 	Vector3 _gravity;
 	//std::vector<Firework*> _firework_pool; // Fireworks to be used as models!
 	//! This is used currently in the Fireworks to spread more Fireworks!

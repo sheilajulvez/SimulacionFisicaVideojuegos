@@ -23,6 +23,15 @@ public:
 	inline Vector4 getColor() { return color; }
 	inline void setColor(Vector4 color) {this->color = color; renderItem->color = color;}
 
+	inline int getMasa() {
+		return masa;
+	}
+
+	void addForce(Vector3 f);
+	
+	// Add force to apply in next integration only
+	void clearForce();
+
 protected:
 	/*Posición inicial
 		2. Velocidad inicial
@@ -44,6 +53,10 @@ protected:
 	bool muere;
 	int masa;
 	Vector3 acelera;
+
+	// Accumulated force
+	Vector3 force;
+	
 	
 	
 

@@ -9,21 +9,47 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 acelera, int mas, Vector4 c
 	this->payload = payload;
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(radio)), &trans, color);
 	muere = false;
+	force = { 0,0,0 };
 }
 Particle::~Particle() {
 	DeregisterRenderItem(renderItem);
 
 }
 void Particle::integrate(double t) {
-	timer += t;
+	/*timer += t;
 	vel += acelera * t;
 	vel *= pow(damping, t);
 	trans.p += vel * t;
-	if (timer > time) muere = true;
+	if (timer > time) muere = true;*/
+
+
+	// Semi-implicit Euler algorithm
+	
+// Get the accel considering the force accum
+	Vector3 resulting_accel = force * masa;
+	vel += resulting_accel * t; // Ex. 1.3 --> add acceleration
+	vel *= powf(damping, t); // Exercise 1.3 --> adddamping
+	trans.p += vel * t;
+	timer += t;
+	// Clear accum
+	clearForce();
+	if (timer >time) muere = true;
 
 
 	/*if (timer >= time) return true;
 	else return false;*/
 
 }
+
+// Clears accumulated force
+void Particle::addForce(Vector3 f) {
+	force += f;
+}
+
+// Add force to apply in next integration only
+void Particle::clearForce() {
+	force *= 0.0;
+}
+
+
 

@@ -104,7 +104,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'N': {
 		////creacion de una partícula
  	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(-100, -100, -100), 
-			Vector3(0, 1, 0) * 30, Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
+			Vector3(0, 10, 0) , Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
 
 		break;
 	}
@@ -117,9 +117,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'P':
 	{
 		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-50, -50, -50),
-			Vector3(0, 1, 0) , Vector3(0, 9.8, 0), 2, 3, Vector4{ 0,0,1,1 }, 1);
+			Vector3(0, 0, 0) , Vector3(0, 9.8, 0), 2, 3, Vector4{ 0,0,1,1 }, 1);
 		break;
 	}
+	case 'Z':
+		systemparticle->generateParticle(4, GetCamera()->getEye() + Vector3(-50, -50, -50),
+			Vector3(0, 1, 0), Vector3(0, 9.8, 0), 2, 3, Vector4{ 1,0,0,1 }, 2);
+		break;
+
 	default:
 		break;
 	}
