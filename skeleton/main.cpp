@@ -7,11 +7,11 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Particle.h"
+#include "SystemParticle.h"
 #include <iostream>
 #include <list>
 
-std::string display_text = "This is a test";
+std::string display_text = "Practica Sheila Julvez";
 
 
 using namespace physx;
@@ -30,7 +30,8 @@ PxPvd* gPvd = NULL;
 PxDefaultCpuDispatcher* gDispatcher = NULL;
 PxScene* gScene = NULL;
 ContactReportCallback gContactReportCallback;
-std::list<Particle*>particulas;
+//std::list<Particle*>particulas;
+SystemParticle* systemparticle=nullptr;
 using namespace std;
 //std::vector<Particle*> particulas;
 // Initialize physics engine
@@ -56,6 +57,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+	systemparticle = new SystemParticle({ 0.0f, -3.8f, 0.0f });
 
 }
 
@@ -69,17 +71,8 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
-	list<Particle*>::iterator e = particulas.begin();
-	while (e != particulas.end()) {
-		auto aux = e;
-		++aux;
-		if ((*e)->gettimer() <= 3)(*e)->integrate(t);
-		else {  
-			delete *e;
-			particulas.remove(*e); 
-		}
-		e = aux;
-	}
+	systemparticle->update(t);
+	
 }
 
 // Function to clean data
@@ -98,6 +91,7 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 
 	gFoundation->release();
+	delete(systemparticle);
 }
 
 // Function called when a key is pressed
@@ -107,22 +101,23 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch (toupper(key))
 	{
-	case 'F': {
-		//creacion de una partícula
-		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 50, Vector3(0, -5, 0), 2, Vector4{ 150 , 0, 50, 1 });
-		particulas.push_back(p);
+	case 'N': {
+		////creacion de una partícula
+ 	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(-100, -100, -100), 
+			Vector3(0, 1, 0) * 30, Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
 
 		break;
 	}
-	case 'G': {
-		//creacion de una partícula
-		Particle* p = new Particle(GetCamera()->getEye(), GetCamera()->getDir() * 30, Vector3(0, -5, 0), 2, Vector4{ 0 , 250, 0, 1 });
-		particulas.push_back(p);
-
+	case 'B': {
+		
+		systemparticle->generateParticle(2, GetCamera()->getEye()+Vector3(-20,-20,-20),
+			Vector3(0, 1, 0) * 10, Vector3(0, 9.8, 0), 2, 1, Vector4{ 1,0,0,1 }, 1);
 		break;
 	}
-	case ' ':
+	case 'P':
 	{
+		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-50, -50, -50),
+			Vector3(0, 1, 0) , Vector3(0, 9.8, 0), 2, 3, Vector4{ 0,0,1,1 }, 1);
 		break;
 	}
 	default:

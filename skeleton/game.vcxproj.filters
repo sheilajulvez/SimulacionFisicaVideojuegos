@@ -11,6 +11,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="GeneratorParticle.cpp" />
+    <ClCompile Include="SimpleGeneratorParticle.cpp" />
+    <ClCompile Include="SystemParticle.cpp" />
+    <ClCompile Include="FireWork.cpp" />
+    <ClCompile Include="GausianGeneratorParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -23,6 +28,11 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="GeneratorParticle.h" />
+    <ClInclude Include="SimpleGeneratorParticle.h" />
+    <ClInclude Include="SystemParticle.h" />
+    <ClInclude Include="FireWork.h" />
+    <ClInclude Include="GausianGeneratorParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
