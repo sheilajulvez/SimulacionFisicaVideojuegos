@@ -8,7 +8,7 @@ class Particle
 public:
 	Particle(Vector3 Pos, Vector3 Vel, Vector3 acelera, int mas, Vector4 color, float timer, int payload, float radio);
 	
-	~Particle();
+	virtual ~Particle();
 	void integrate(double t);//bool
 	inline float gettimer() { return time; }
 	inline void settimer(float t) {time = t;}
@@ -44,7 +44,7 @@ protected:
 
 	physx::PxTransform trans;
 	Vector3 vel;
-	float tam;
+	//float tam;
 	Vector4 color;
 	RenderItem* renderItem;
 	float timer = 0;

@@ -1,6 +1,5 @@
 #pragma once
 #include "Particle.h"
-
 #include <list>
 class GeneratorParticle;
 class FireWork:public Particle

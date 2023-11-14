@@ -75,7 +75,8 @@ GeneratorParticle* SystemParticle::getParticleGenerator(const std::string& n) {
 
 void SystemParticle::onParticleDeath(Particle* p) {
 	_particles.remove(p);
-	//delete(p);
+	delete(p);
+	
 }
 void SystemParticle::createFireworkSystem() {
 
