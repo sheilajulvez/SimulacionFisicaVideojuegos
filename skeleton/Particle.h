@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "PxPhysics.h"
 #include "RenderUtils.hpp"
 const float damping = 0.998;

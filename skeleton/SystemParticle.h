@@ -20,7 +20,7 @@ public :
 protected:
 	std::list <Particle*> _particles;
 	std::list <GeneratorParticle*> _particle_generators; // These are the registred generators(for on demand set generation prob.to 0
-	std::list<ForceGenerator*> _force_generators;
+	std::vector<ForceGenerator*> _force_generators;
 	FireWork* firework;
 	ParticleForceRegistry* particleforceregistry;
 	

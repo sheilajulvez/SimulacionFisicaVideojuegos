@@ -2,15 +2,21 @@
 #include "SimpleGeneratorParticle.h"
 #include"GausianGeneratorParticle.h"
 #include "GravityFocreGenerator.h"
+#include "WindForceGenerator.h"
 SystemParticle::SystemParticle(const Vector3& g) {
 	_gravity = g;
 	_firework_generator = new SimpleGeneratorParticle(Vector3{ 50,50,50 }, Vector3{ 20,20,20 });
 	_particle_generators.push_back(_firework_generator);
 	_firework_generator = new GausianGeneratorParticle(Vector3{ 50,50,50 }, Vector3{ 20,20,20 });
+	_particle_generators.push_back(_firework_generator);
+
 	force_generator = new GravityForceGenerator(_gravity);
 	_force_generators.push_back(force_generator);
-	_particle_generators.push_back(_firework_generator);
+	force_generator = new WindForceGenerator(Vector3{ -300,0,0 }, Vector3{ -70,-70,-70 }, Vector3{ 100,100,100 }, 0.8, 0);
+	_force_generators.push_back(force_generator);
+	
 	particleforceregistry = new ParticleForceRegistry();
+
 }
 
 SystemParticle::~SystemParticle(){
@@ -27,11 +33,11 @@ void SystemParticle:: update(double t) {
 		(*it)->integrate(t);
 		if ((*it)->getmuere()) {
 			
-			if (static_cast<FireWork*>(*it)->gettype() >=1) {
+			if (static_cast<FireWork*>(*it)->gettype() ==1|| static_cast<FireWork*>(*it)->gettype() == 2|| static_cast<FireWork*>(*it)->gettype() == 3) {
 				std::list<Particle*> p = static_cast<FireWork*>(*it)->explode();
 				for (auto d : p) {
 					_particles.push_back(d);
-					particleforceregistry->addRegistry(_force_generators.front(), d);
+					//particleforceregistry->addRegistry(_force_generators.front(), d);
 				}
 			}
 			onParticleDeath(*it);
@@ -55,12 +61,18 @@ void SystemParticle::generateParticle(unsigned firework_type, Vector3 pos, Vecto
 	case 3:
 		firework->addGenerator(_particle_generators.front());
 		break;
+	case 4:
+		particleforceregistry->addRegistry(_force_generators[0], firework);
+		break;
+	case 5:
+		particleforceregistry->addRegistry(_force_generators[1], firework);
+		break;
 	default:
 		break;
 
 	}
 	_particles.push_back(firework);
-	particleforceregistry->addRegistry(_force_generators.front(), firework);
+	
 	
 	
 }
