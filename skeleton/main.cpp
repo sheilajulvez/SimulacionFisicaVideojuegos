@@ -103,7 +103,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'N': {
 		////creacion de una partícula
- 	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(-100, -100, -100), 
+ 	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(0, 0, -100), 
 			Vector3(0, 1, 0) * 30, Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
 
 		break;
