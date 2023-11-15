@@ -57,7 +57,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	systemparticle = new SystemParticle({ 0.0f, -3.8f, 0.0f });
+	systemparticle = new SystemParticle();
 
 }
 
@@ -101,34 +101,58 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch (toupper(key))
 	{
-	case 'N': {
-		////creacion de una partícula
+	case 'P': {
+		//Particula generador gausiana distribucion 1
  	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(-100, -100, -100), 
 			Vector3(0, 10, 0) , Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
 	  
 
 		break;
 	}
-	case 'B': {
-		
+	case 'O': {
+		//Particula generador gausiano distribucion 2
 		systemparticle->generateParticle(2, GetCamera()->getEye()+Vector3(-20,-20,-20),
 			Vector3(0, 1, 0) * 10, Vector3(0, 9.8, 0), 2, 1, Vector4{ 1,0,0,1 }, 1);
 		break;
 	}
-	case 'P':
-	{
+	case 'I':
+	{	//Particula generador simple 
 		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-50, -50, -50),
 			Vector3(0, 0, 0) , Vector3(0, 9.8, 0), 2, 3, Vector4{ 0,0,1,1 }, 1);
 		break;
 	}
 	case 'G':
+		//particula fuerza gravedad 1 masa 2
 		systemparticle->generateParticle(4, GetCamera()->getEye() + Vector3(-50, -50, -50),
 			Vector3(0, 1, 0), Vector3(0, 9.8, 0), 2, 3, Vector4{ 1,0,0,1 }, 2);
 		break;
-	case 'V':
+	case 'J':
+		//particula fuerza gravedad 1 masa 20
+		systemparticle->generateParticle(4, GetCamera()->getEye() + Vector3(-50, -50, -50),
+			Vector3(0, 1, 0), Vector3(0, 9.8, 0), 20, 3, Vector4{ 0.5,0,0,1 }, 2);
+		break;
+	case 'H':
+		//particula fuerza gravedad 2
 		systemparticle->generateParticle(5, GetCamera()->getEye() + Vector3(-50, -50, -50),
-			Vector3(-10, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 1,0,0,1 }, 3);
+			Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 0,1,0,1 }, 3);
+		break;
+	case 'V':
+		//particula fuerza viento 
+		systemparticle->generateParticle(6, GetCamera()->getEye() + Vector3(-50, 0, -50),
+			Vector3(30, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 0,0.5,0,1 }, 3);
 		
+		break;
+	case 'B':
+		//particula fuerza viento 
+		systemparticle->generateParticle(6, GetCamera()->getEye() + Vector3(-50, 0, -50),
+			Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 0,0.2,0,1 }, 4);
+
+		break;
+	case 'M':
+		//particula fuerza viento 
+		systemparticle->generateParticle(7, GetCamera()->getEye() + Vector3(-50, 0, -50),
+			Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 0.9,0.1,0.9,1 }, 2);
+
 		break;
 
 	default:

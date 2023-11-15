@@ -3,18 +3,24 @@
 #include"GausianGeneratorParticle.h"
 #include "GravityFocreGenerator.h"
 #include "WindForceGenerator.h"
-SystemParticle::SystemParticle(const Vector3& g) {
-	_gravity = g;
+#include "WhirlwindForceGenerator.h"
+SystemParticle::SystemParticle() {
+	
 	_firework_generator = new SimpleGeneratorParticle(Vector3{ 50,50,50 }, Vector3{ 20,20,20 });
 	_particle_generators.push_back(_firework_generator);
 	_firework_generator = new GausianGeneratorParticle(Vector3{ 50,50,50 }, Vector3{ 20,20,20 });
 	_particle_generators.push_back(_firework_generator);
 
-	force_generator = new GravityForceGenerator(_gravity);
+	//FORCE_GENERATOR[ gravity1, gravity2, wind, whirlwind,]
+	force_generator = new GravityForceGenerator(g1);
+	_force_generators.push_back(force_generator);
+	force_generator = new GravityForceGenerator(g2);
 	_force_generators.push_back(force_generator);
 	force_generator = new WindForceGenerator(Vector3{ -300,0,0 }, Vector3{ -70,-70,-70 }, Vector3{ 100,100,100 }, 0.8, 0);
 	_force_generators.push_back(force_generator);
-	
+	force_generator = new WhirlwindForceGenerator(Vector3{ -300,0,0 }, Vector3{ -70,-70,-70 }, Vector3{ 100,100,100 }, 0.8, 0);
+	_force_generators.push_back(force_generator);
+
 	particleforceregistry = new ParticleForceRegistry();
 
 }
@@ -65,6 +71,14 @@ void SystemParticle::generateParticle(unsigned firework_type, Vector3 pos, Vecto
 		particleforceregistry->addRegistry(_force_generators[0], firework);
 		break;
 	case 5:
+		particleforceregistry->addRegistry(_force_generators[1], firework);
+		break;
+	case 6:
+		particleforceregistry->addRegistry(_force_generators[2], firework);
+		particleforceregistry->addRegistry(_force_generators[1], firework);
+		break;
+	case 7:
+		particleforceregistry->addRegistry(_force_generators[3], firework);
 		particleforceregistry->addRegistry(_force_generators[1], firework);
 		break;
 	default:

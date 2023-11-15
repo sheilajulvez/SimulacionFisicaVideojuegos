@@ -8,7 +8,7 @@ class SystemParticle
 {
 public :
 	// Creates a void system with a det. gravity
-		SystemParticle(const Vector3& g = { 0.0f, -3.8f, 0.0f});	//COMENTADO -3.8
+		SystemParticle();	//COMENTADO -3.8
 		virtual ~SystemParticle();
 		// Integrates the particles and checks for its lifetime, etc!
 		void update(double t);
@@ -32,6 +32,8 @@ protected:
 	//! This is used currently in the Fireworks to spread more Fireworks!
 	void onParticleDeath(Particle* p);
 	void createFireworkSystem();
+	Vector3 g1 = { 0.0f, -3.8f, 0.0f };
+	Vector3 g2 = { 0.0f, -10.8f, 0.0f };
 	
 	
 };
