@@ -116,7 +116,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'I':
 	{	//Particula generador simple 
 		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-100, -100, -100),
-			Vector3(10, 10, 10) , Vector3(0, 0, 0), 2, 2, Vector4{ 0,0,1,1 }, 1);
+			Vector3(10, 40, 10) , Vector3(0, 0, 0), 5, 2, Vector4{ 0,0,1,1 }, 1);
 		break;
 	}
 	case 'G':
