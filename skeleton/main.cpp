@@ -101,23 +101,23 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch (toupper(key))
 	{
-	case 'N': {
-		////creacion de una partícula
- 	  systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(0, 0, -100), 
-			Vector3(0, 1, 0) * 30, Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
-
+	
+	case 'Z': {
+		//Particula generador gausiana distribucion 1
+		systemparticle->generateParticle(1, GetCamera()->getEye() + Vector3(-100, -100, -100),
+			Vector3(0, 10, 0), Vector3(0, 9.8, 0), 2, 2, Vector4{ 0.749,0.800,0,1 }, 4);
 		break;
 	}
-	case 'B': {
-		
-		systemparticle->generateParticle(2, GetCamera()->getEye()+Vector3(-20,-20,-20),
-			Vector3(0, 1, 0) * 10, Vector3(0, 9.8, 0), 2, 1, Vector4{ 1,0,0,1 }, 1);
+	case 'X': {
+		//Particula generador gausiano distribucion 2
+		systemparticle->generateParticle(2, GetCamera()->getEye() + Vector3(-40, -40, -40),
+			Vector3(0, 1, 0) * 40, Vector3(0, 9.8, 0), 0.5f, 1, Vector4{ 1,0,0,1 }, 1);
 		break;
 	}
-	case 'P':
-	{
-		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-50, -50, -50),
-			Vector3(0, 1, 0) , Vector3(0, 9.8, 0), 2, 3, Vector4{ 0,0,1,1 }, 1);
+	case 'Y':
+	{	//Particula generador simple 
+		systemparticle->generateParticle(3, GetCamera()->getEye() + Vector3(-100, -100, -100),
+			Vector3(10, 70, 10), Vector3(0, 9.8, 0), 4, 1, Vector4{ 0,0,1,1 }, 2);
 		break;
 	}
 	default:
