@@ -8,11 +8,11 @@ WhirlwindForceGenerator::~WhirlwindForceGenerator() {
 }
 void WhirlwindForceGenerator::updateForce(Particle* particle, double t) {
 	Vector3 position = particle->getTrans().p;
-	if (fabs(1 / particle->getMasa()) < 1e-10) return;
+	//if (fabs(1 / particle->getMasa()) < 1e-10) return;
 
 	Vector3 Velocity_WhirlWind = _k1 * Vector3(
 		-(position.z - ini_pos.z), 
-		50 - (position.y - ini_pos.y), 
+		50- (position.y - ini_pos.y/2), 
 		(position.x - ini_pos.x));
 
 	Vector3 Velocity = particle->getVel() - Velocity_WhirlWind;
