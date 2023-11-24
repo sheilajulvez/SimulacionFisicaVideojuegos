@@ -124,12 +124,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		systemparticle->generateParticle(4, GetCamera()->getEye() + Vector3(-40, -40, -40),
 			Vector3(0, 30, 0), Vector3(0, 0, 0), 2, 15, Vector4{ 1,0,0,1 }, 2);
 		break;
-	case 'J':
+	case 'H':
 		//particula fuerza gravedad 1 masa 20
 		systemparticle->generateParticle(4, GetCamera()->getEye() + Vector3(-100, -50, -100)*3,
 			Vector3(0, 20, 0), Vector3(0, 0, 0), 20, 15, Vector4{ 0.5,0,0,1 }, 5);
 		break;
-	case 'H':
+	case 'J':
 		//particula fuerza gravedad 2
 		systemparticle->generateParticle(5, GetCamera()->getEye() + Vector3(-100, -50, -100) ,
 			Vector3(0, 100, 0), Vector3(0, 0, 0), 1, 30, Vector4{ 0,1,0,1 }, 3);
@@ -138,7 +138,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//particula fuerza viento 
 		systemparticle->generateParticle(6, GetCamera()->getEye() + Vector3(-50, 0, -50),
 			Vector3(5, 0, 0), Vector3(0, 0, 0), 2, 30, Vector4{ 0,0.5,0,1 }, 3);
-		
 		break;
 	case 'B':
 		//particula fuerza viento 
@@ -150,7 +149,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//particula fuerza WHIRL
 		systemparticle->generateParticle(7, GetCamera()->getEye() + Vector3(-50, 0, -50),
 			Vector3(0, 0, 0), Vector3(0, 0, 0), 2, 3000, Vector4{ 0.9,0.1,0.9,1 }, 2);
-
 		break;
 	case 'N':
 		//particula expllosion
@@ -158,8 +156,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case 'M':
 		systemparticle->explosion();
-
-
 
 	default:
 		break;

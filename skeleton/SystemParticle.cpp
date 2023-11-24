@@ -19,7 +19,8 @@ SystemParticle::SystemParticle() {
 	_force_generators.push_back(force_generator);
 	force_generator = new WindForceGenerator(Vector3{ -300,0,0 }, Vector3{ -70,-70,-70 }, Vector3{ 100,100,100 }, 0.8, 0);
 	_force_generators.push_back(force_generator);
-	force_generator = new WhirlwindForceGenerator(Vector3{ -300,0,0 }, Vector3{ -70,-70,-70 }, Vector3{ 100,100,100 }, 0.9, 0);
+	force_generator = new WhirlwindForceGenerator(Vector3{ 0.7f,0.03f,0.03f }, Vector3{ 10,0,0 }, Vector3{ 10,5,5 }, 2.0, 0);
+	
 	_force_generators.push_back(force_generator);
 	force_generator = new ExplosionForceGenerator({ -50,-50,-50 }, { 90,90,90 }, 900, 1);
 	_force_generators.push_back(force_generator);
