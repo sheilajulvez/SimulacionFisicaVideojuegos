@@ -4,6 +4,7 @@
 #include "ForceGenerator.h"
 #include "ParticleForceRegistry.h"
 #include "FireWork.h"
+#include "AnchoredSpringForceGenerator.h"
 class SystemParticle
 {
 public :
@@ -15,8 +16,15 @@ public :
 		// Method to generate a Firework with the appropiate type
 		void generateParticle(unsigned firework_type, Vector3 pos, Vector3 vel, Vector3 acelera, int masa, float time, Vector4 color, int radio);
 		void generateGenerator();
+		void generateAnchoredSpring();
+		void generateSpring();
 		// Gets a particle generator with name...
 		GeneratorParticle* getParticleGenerator(const std::string& n);
+		inline void morek() {
+			double k = f3->getk() + 1;
+			f3->setk(k);
+		}
+
 
 		void explosion();
 protected:
@@ -37,7 +45,9 @@ protected:
 	void createFireworkSystem();
 	Vector3 g1 = { 0.0f, -3.8f, 0.0f };
 	Vector3 g2 = { 0.0f, -100.8f, 0.0f };
-	Vector3 centre{ -50, -30, -50} ;
+	Vector3 centre{ -50, -30, -50};
+
+	AnchoredSpringForceGenerator* f3;
 	
 };
 

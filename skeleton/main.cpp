@@ -156,6 +156,15 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case 'M':
 		systemparticle->explosion();
+		break;
+	case '1':
+		systemparticle->generateAnchoredSpring();
+		break;
+	case'2':
+		systemparticle->generateSpring();
+		break;
+	case'+':
+		systemparticle->morek();
 
 	default:
 		break;

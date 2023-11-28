@@ -5,6 +5,8 @@
 #include "WindForceGenerator.h"
 #include "WhirlwindForceGenerator.h"
 #include "ExplosionForceGenerator.h"
+#include "SpringForceGenerator.h"
+
 SystemParticle::SystemParticle() {
 	
 	_firework_generator = new SimpleGeneratorParticle(Vector3{ 50,50,50 }, Vector3{ 20,20,20 });
@@ -150,4 +152,38 @@ void SystemParticle::explosion() {
 
 	}
 
+}
+
+void SystemParticle::generateSpring() {
+	// First one standard spring uniting 2 particles
+	//Vector3 Pos, Vector3 Vel, Vector3 acelera, int mas, Vector4 color, float timer, int payload, float radio);
+	Particle* p1 = new Particle(Vector3{-10.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 1, { 1.0, 0.0, 0.0,1 }, 20.0,0,2.0);
+	Particle* p2 = new Particle(Vector3{ 10.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 1, { 0.0, 1.0, 0.0,1 }, 20.0, 0, 2.0);
+	
+	SpringForceGenerator* f1 = new SpringForceGenerator(10, 40, p2);
+	particleforceregistry->addRegistry(f1, p1);
+
+	SpringForceGenerator * f2 = new SpringForceGenerator(10, 40, p1);
+	particleforceregistry->addRegistry(f2, p2);
+
+	WindForceGenerator* wf = new WindForceGenerator({ 0,100,0 }, { 0,0,0 }, { 100,10,50 }, 0.5, 0.0);
+	particleforceregistry->addRegistry(wf, p1);
+	particleforceregistry->addRegistry(wf, p2);
+	particleforceregistry->addRegistry(_force_generators[0], p1);
+	particleforceregistry->addRegistry(_force_generators[0], p2);
+
+	_force_generators.push_back(f1);
+	_force_generators.push_back(f2);
+	_force_generators.push_back(wf);
+
+	_particles.push_back(p1);
+	_particles.push_back(p2);
+}
+
+void SystemParticle::generateAnchoredSpring() {
+	Particle* p3= new Particle(Vector3{ -10.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 1, { 1.0, 0.0, 0.0,1 }, 20.0, 0, 2.0);
+	f3 = new AnchoredSpringForceGenerator(2, 50, { 10,50,0 });
+	particleforceregistry->addRegistry(f3, p3);
+	_force_generators.push_back(f3);
+	_particles.push_back(p3);
 }

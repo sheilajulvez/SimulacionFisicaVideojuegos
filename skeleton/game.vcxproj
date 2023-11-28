@@ -253,6 +253,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnchoredSpringForceGenerator.cpp" />
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="DragForceGenerator.cpp" />
     <ClCompile Include="ExplosionForceGenerator.cpp" />
@@ -268,11 +270,14 @@
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="SimpleGeneratorParticle.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="SystemParticle.cpp" />
     <ClCompile Include="WhirlwindForceGenerator.cpp" />
     <ClCompile Include="WindForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnchoredSpringForceGenerator.h" />
+    <ClInclude Include="BuoyancyForceGenerator.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="DragForceGenerator.h" />
@@ -288,6 +293,7 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="SimpleGeneratorParticle.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="SystemParticle.h" />
     <ClInclude Include="WhirlwindForceGenerator.h" />
     <ClInclude Include="WindForceGenerator.h" />
