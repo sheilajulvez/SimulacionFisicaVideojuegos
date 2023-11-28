@@ -17,5 +17,4 @@ void WindForceGenerator::updateForce(Particle* particle, double t) {
 		particle->addForce(dragF);
 	}
 	else return;
-
 }

@@ -26,7 +26,7 @@ void Particle::integrate(double t) {
 	// Semi-implicit Euler algorithm
 	
 // Get the accel considering the force accum
-	Vector3 resulting_accel = force * masa;
+	Vector3 resulting_accel = force * masa;			//CORREGIR POR INVERSO DE LA MASA
 	vel += resulting_accel * t; // Ex. 1.3 --> add acceleration
 	vel *= powf(damping, t); // Exercise 1.3 --> adddamping
 	trans.p += vel * t;

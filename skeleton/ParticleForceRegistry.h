@@ -10,9 +10,7 @@ public:
             it->first->updateForce(it->second,duration);
         }
     }
-
     void addRegistry(ForceGenerator* fg, Particle* p) {
-
         emplace(fg, p);
         //emplace({fg,p});
     }
