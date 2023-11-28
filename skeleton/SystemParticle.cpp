@@ -6,6 +6,7 @@
 #include "WhirlwindForceGenerator.h"
 #include "ExplosionForceGenerator.h"
 #include "SpringForceGenerator.h"
+#include "BuoyancyForceGenerator.h"
 
 SystemParticle::SystemParticle() {
 	
@@ -186,4 +187,12 @@ void SystemParticle::generateAnchoredSpring() {
 	particleforceregistry->addRegistry(f3, p3);
 	_force_generators.push_back(f3);
 	_particles.push_back(p3);
+}
+void SystemParticle::generateBuoyancySpring() {
+	Particle* p4= new Particle(Vector3{ 0.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 1, { 1.0, 0.0, 0.0,1 }, 20.0, 0, 2.0);
+	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(50, 2, 0.7, { -5,20,0 });
+	particleforceregistry->addRegistry(f4, p4);
+	particleforceregistry->addRegistry(_force_generators[0], p4);
+	_force_generators.push_back(f4);
+	_particles.push_back(p4);
 }

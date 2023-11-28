@@ -18,6 +18,7 @@ public :
 		void generateGenerator();
 		void generateAnchoredSpring();
 		void generateSpring();
+		void generateBuoyancySpring();
 		// Gets a particle generator with name...
 		GeneratorParticle* getParticleGenerator(const std::string& n);
 		inline void morek() {

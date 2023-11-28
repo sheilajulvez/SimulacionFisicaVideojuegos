@@ -3,10 +3,14 @@
 #include "core.hpp"
 class BuoyancyForceGenerator:public ForceGenerator
 {
-	BuoyancyForceGenerator(float h, float V, float d);
+public:
+	BuoyancyForceGenerator(float h, float V, float d, const Vector3& pos);
 	virtual ~BuoyancyForceGenerator();
+	virtual void updateForce(Particle* particle, double t) override;
 protected:
 	float height, volume, liquid_density, gravity = 9.8;
-	Particle* liquid_particle;
+
+	physx::PxTransform trans;
+	RenderItem* renderItem;
 };
 

@@ -165,6 +165,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case'+':
 		systemparticle->morek();
+		break;
+	case'3':
+		systemparticle->generateBuoyancySpring();
+		break;
 
 	default:
 		break;
