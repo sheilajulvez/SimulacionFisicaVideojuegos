@@ -189,8 +189,8 @@ void SystemParticle::generateAnchoredSpring() {
 	_particles.push_back(p3);
 }
 void SystemParticle::generateBuoyancySpring() {
-	Particle* p4= new Particle(Vector3{ 0.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 1, { 1.0, 0.0, 0.0,1 }, 20.0, 0, 2.0);
-	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(50, 2, 0.7, { -5,20,0 });
+	Particle* p4= new Particle(Vector3{ 0.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 20, { 1.0, 0.0, 0.0,1 }, 20.0, 0, Vector3(2,2,2));
+	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(50, 20, 1, { -5,50,0 });
 	particleforceregistry->addRegistry(f4, p4);
 	particleforceregistry->addRegistry(_force_generators[0], p4);
 	_force_generators.push_back(f4);

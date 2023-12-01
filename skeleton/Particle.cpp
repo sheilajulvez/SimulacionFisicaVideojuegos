@@ -11,6 +11,18 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 acelera, int mas, Vector4 c
 	muere = false;
 	force = { 0,0,0 };
 }
+Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 acelera, int mas, Vector4 color, float timer, int payload, Vector3 tam):trans(Pos) {
+	this->vel = Vel;
+	this->acelera = acelera;
+	masa = mas;
+	this->acelera = acelera;
+	this->color = color;
+	this->time = timer;
+	this->payload = payload;
+	renderItem = new RenderItem(CreateShape(physx::PxBoxGeometry(tam)), &trans, color);
+	muere = false;
+	force = { 0,0,0 };
+}
 Particle::~Particle() {
 	DeregisterRenderItem(renderItem);
 
