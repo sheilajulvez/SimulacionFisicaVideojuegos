@@ -32,10 +32,10 @@ SystemParticle::SystemParticle() {
 
 	particleforceregistry = new ParticleForceRegistry();
 
+
 }
 
 SystemParticle::~SystemParticle(){
-
 }
 // Integrates the particles and checks for its lifetime, etc!
 void SystemParticle:: update(double t) {
@@ -48,7 +48,7 @@ void SystemParticle:: update(double t) {
 		(*it)->integrate(t);
 		if ((*it)->getmuere()) {
 			
-			if (static_cast<FireWork*>(*it)->gettype() ==1|| static_cast<FireWork*>(*it)->gettype() == 2|| static_cast<FireWork*>(*it)->gettype() == 3) {
+			if (static_cast<FireWork*>(*it)->gettype() ==1|| static_cast<FireWork*>(*it)->gettype() == 2|| static_cast<FireWork*>(*it)->gettype() == 3|| static_cast<FireWork*>(*it)->gettype() == 10|| static_cast<FireWork*>(*it)->gettype() == 11) {
 				std::list<Particle*> p = static_cast<FireWork*>(*it)->explode();
 				for (auto d : p) {
 					_particles.push_back(d);
@@ -73,7 +73,13 @@ void SystemParticle::generateParticle(unsigned firework_type, Vector3 pos, Vecto
 	case 2:
 		firework->addGenerator(_particle_generators.back());
 		break;
+	case 10:
+		firework->addGenerator(_particle_generators.back());
+		break;
 	case 3:
+		firework->addGenerator(_particle_generators.front());
+		break;
+	case 11:
 		firework->addGenerator(_particle_generators.front());
 		break;
 	case 4:
@@ -92,7 +98,6 @@ void SystemParticle::generateParticle(unsigned firework_type, Vector3 pos, Vecto
 
 		break;
 	case 8:
-	
 		for (int i = 0; i < 15; ++i) {
 			// Calcular una posición aleatoria dentro del área
 			float randomRadius = (static_cast<float>(rand()) / RAND_MAX) * 50;
@@ -119,6 +124,7 @@ void SystemParticle::generateParticle(unsigned firework_type, Vector3 pos, Vecto
 		particleforceregistry->addRegistry(_force_generators[5], firework);
 		particleforceregistry->addRegistry(_force_generators[0], firework);
 		break;
+	
 	default:
 		break;
 
@@ -192,7 +198,15 @@ void SystemParticle::generateBuoyancySpring() {
 	Particle* p4= new Particle(Vector3{ 0.0, 50.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, 20, { 1.0, 0.0, 0.0,1 }, 20.0, 0, Vector3(2,2,2));
 	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(50, 20, 1, { -5,50,0 });
 	particleforceregistry->addRegistry(f4, p4);
-	particleforceregistry->addRegistry(_force_generators[0], p4);
+	particleforceregistry->addRegistry(_force_generators[0], p4);	//gravedad
 	_force_generators.push_back(f4);
 	_particles.push_back(p4);
 }
+void SystemParticle::Circuito() {
+	createSquareRaw();
+}
+void SystemParticle::createSquareRaw() {
+	Particle* p= new Particle(Vector3{ 0,50,0 }, Vector3{ 0,0,0 }, Vector3{ 0,0,0 }, 2, Vector4{ 1,0,0,1 }, 20, 1, Vector3{ 2,1,2 });
+	_particles.push_back(p);
+}
+

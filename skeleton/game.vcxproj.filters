@@ -26,6 +26,13 @@
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="AnchoredSpringForceGenerator.cpp" />
     <ClCompile Include="BuoyancyForceGenerator.cpp" />
+    <ClCompile Include="RigidBodyParticle.cpp" />
+    <ClCompile Include="SystemRigidBody.cpp" />
+    <ClCompile Include="RigidBodyForceRegistry.cpp" />
+    <ClCompile Include="RigidBodyForceGenerator.cpp" />
+    <ClCompile Include="LinearForceGenerator.cpp" />
+    <ClCompile Include="RigidBodySprinngForceGenerator.cpp" />
+    <ClCompile Include="RigidBodyWindForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -53,6 +60,13 @@
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="AnchoredSpringForceGenerator.h" />
     <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="RigidBodyParticle.h" />
+    <ClInclude Include="SystemRigidBody.h" />
+    <ClInclude Include="RigidBodyForceRegistry.h" />
+    <ClInclude Include="RigidBodyForceGenerator.h" />
+    <ClInclude Include="LinearForceGenerator.h" />
+    <ClInclude Include="RigidBodySprinngForceGenerator.h" />
+    <ClInclude Include="RigidBodyWindForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

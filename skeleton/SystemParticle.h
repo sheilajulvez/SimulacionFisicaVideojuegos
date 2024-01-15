@@ -1,10 +1,10 @@
 #pragma once
-
 #include "GeneratorParticle.h"
 #include "ForceGenerator.h"
 #include "ParticleForceRegistry.h"
 #include "FireWork.h"
 #include "AnchoredSpringForceGenerator.h"
+
 class SystemParticle
 {
 public :
@@ -25,9 +25,10 @@ public :
 			double k = f3->getk() + 1;
 			f3->setk(k);
 		}
-
-
+		void Circuito();
+		void createSquareRaw();
 		void explosion();
+
 protected:
 	std::list <Particle*> _particles;
 	std::list <GeneratorParticle*> _particle_generators; // These are the registred generators(for on demand set generation prob.to 0
@@ -35,8 +36,6 @@ protected:
 	std::list<Particle*> particles_explosion;
 	FireWork* firework;
 	ParticleForceRegistry* particleforceregistry;
-	
-	
 	GeneratorParticle* _firework_generator; // This generator is only to shoot the firework!!
 	ForceGenerator* force_generator;
 	Vector3 _gravity;
@@ -49,6 +48,8 @@ protected:
 	Vector3 centre{ -50, -30, -50};
 
 	AnchoredSpringForceGenerator* f3;
+
+
 	
 };
 

@@ -116,7 +116,11 @@ PxVec3 Camera::getDir() const
 { 
 	return mDir; 
 }
+void Camera::setPosition(float x, float z) {
+	mEye.x = x;
+	mEye.z = z;
 
+}
 
 }
 

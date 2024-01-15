@@ -263,15 +263,22 @@
     <ClCompile Include="GausianGeneratorParticle.cpp" />
     <ClCompile Include="GeneratorParticle.cpp" />
     <ClCompile Include="GravityFocreGenerator.cpp" />
+    <ClCompile Include="LinearForceGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleForceRegistry.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="RigidBodyForceGenerator.cpp" />
+    <ClCompile Include="RigidBodyForceRegistry.cpp" />
+    <ClCompile Include="RigidBodyParticle.cpp" />
+    <ClCompile Include="RigidBodySprinngForceGenerator.cpp" />
+    <ClCompile Include="RigidBodyWindForceGenerator.cpp" />
     <ClCompile Include="SimpleGeneratorParticle.cpp" />
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="SystemParticle.cpp" />
+    <ClCompile Include="SystemRigidBody.cpp" />
     <ClCompile Include="WhirlwindForceGenerator.cpp" />
     <ClCompile Include="WindForceGenerator.cpp" />
   </ItemGroup>
@@ -287,14 +294,21 @@
     <ClInclude Include="GausianGeneratorParticle.h" />
     <ClInclude Include="GeneratorParticle.h" />
     <ClInclude Include="GravityFocreGenerator.h" />
+    <ClInclude Include="LinearForceGenerator.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="RigidBodyForceGenerator.h" />
+    <ClInclude Include="RigidBodyForceRegistry.h" />
+    <ClInclude Include="RigidBodyParticle.h" />
+    <ClInclude Include="RigidBodySprinngForceGenerator.h" />
+    <ClInclude Include="RigidBodyWindForceGenerator.h" />
     <ClInclude Include="SimpleGeneratorParticle.h" />
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="SystemParticle.h" />
+    <ClInclude Include="SystemRigidBody.h" />
     <ClInclude Include="WhirlwindForceGenerator.h" />
     <ClInclude Include="WindForceGenerator.h" />
   </ItemGroup>
