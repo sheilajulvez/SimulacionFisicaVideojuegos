@@ -85,21 +85,7 @@ void SystemRigidBody::update(double t) {
 		}
 		else if ((*it)->soydinamico() &&(*it)->dinamico()->getGlobalPose().p.x < -190)(*it)->dinamico()->setGlobalPose({ -190,10,(*it)->dinamico()->getGlobalPose().p.z });
 		else if ((*it)->soydinamico()&&(*it)->dinamico()->getGlobalPose().p.x > 190)(*it)->dinamico()->setGlobalPose({ 190,10,(*it)->dinamico()->getGlobalPose().p.z });
-		if (bloqueado) {
-			tiempoActual = std::chrono::high_resolution_clock::now();
-			std::chrono::milliseconds deltaTiempo = std::chrono::duration_cast<std::chrono::milliseconds>(tiempoActual - tiempoPrevio);
-			double deltaTiempoSegundos = deltaTiempo.count() / 1000.0;	//segundos
-			contadorTiempo += deltaTiempoSegundos;
-			if (contadorTiempo > limite && (*it)->getsoypelota()) {
-				registering->deleteRegistry(wind, (*it));
-				tiempoPrevio = tiempoActual;
-				// Esperar un breve periodo de tiempo antes de la próxima actualización
-				tiempoActual = std::chrono::high_resolution_clock::now();
-				contadorTiempo = 0;
-				bloqueado = false;
-
-			}
-		}
+		
 		
 		it = aux;
 	}
@@ -120,11 +106,11 @@ void SystemRigidBody::añadirregistromuelle(RigidBodySprinngForceGenerator* s, Ri
 	force_generators.push_back(s);
 }
 void SystemRigidBody::añadirregistroviento(RigidBodyParticle* p) {
-	if (!bloqueado) {
+	
 		wind->setf({ getrandom(),0,getrandom() });
 		registering->addRegistry(wind, p);
-		bloqueado = true;
-	}
+		
+	
 	
 	
 }

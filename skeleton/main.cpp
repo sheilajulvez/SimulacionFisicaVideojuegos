@@ -13,7 +13,7 @@
 #include "RigidBodySprinngForceGenerator.h"
 
 std::string display_text = "Practica Sheila Julvez";
-
+std::string display_text2 = "HOLAAAAAAAAAAAAAaaaa";
 
 using namespace physx;
 
@@ -243,6 +243,8 @@ void initPhysics(bool interactive)
 	systemparticle = new SystemParticle();
 	systemRigidBody = new SystemRigidBody(systemparticle);
 	CreaScene();
+	drawText(display_text2, 20, 0);
+	
 
 }
 

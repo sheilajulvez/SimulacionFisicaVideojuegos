@@ -52,7 +52,7 @@ public:
 		std::mt19937 gen(rd());  // Inicializar el generador con la semilla
 
 		// Definir la distribución que quieres (por ejemplo, de 1 a 100)
-		std::uniform_int_distribution<> distribution(1, 100);
+		std::uniform_int_distribution<> distribution(-50, 50);
 
 		// Generar un número aleatorio
 		float randomNumber = distribution(gen);
