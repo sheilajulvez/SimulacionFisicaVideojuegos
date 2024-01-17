@@ -21,7 +21,7 @@ void SystemRigidBody::addRB(RigidBodyParticle* r) {
 }
 
 void SystemRigidBody::update(double t) {
-
+	
 	auto it = particles.begin();
 	while (!particles.empty() && it != particles.end()) {
 		auto aux = it;
@@ -50,7 +50,11 @@ void SystemRigidBody::update(double t) {
 						Vector3(0, 1, 0) * 40, Vector3(0, 0, 0), 0.5f, 1, Vector4{ 0,1,0,1 }, 1);
 					systemparticle->generateParticle(10, Vector3(20, 100, 20),
 						Vector3(0, 1, 0) * 40, Vector3(0, 0, 0), 0.5f, 1, Vector4{ 0,1,0,1 }, 1);
+					(*it)->dinamico()->setGlobalPose({ 0,10,0 });
+					(*it)->dinamico()->setLinearVelocity({ 0,0,0 });
 					unavez = false;
+					contadorvictoriasrojo = 0;
+					contadorvictoriasverde = 0;
 				}
 
 
@@ -78,6 +82,10 @@ void SystemRigidBody::update(double t) {
 					systemparticle->generateParticle(2, Vector3(20, 100, 20),
 						Vector3(0, 1, 0) * 40, Vector3(0, 0, 0), 0.5f, 1, Vector4{ 1,0,0,1 }, 1);
 					unavez = false;
+					(*it)->dinamico()->setGlobalPose({ 0,10,0 });
+					(*it)->dinamico()->setLinearVelocity({ 0,0,0 });
+					contadorvictoriasrojo = 0;
+					contadorvictoriasverde = 0;
 				}
 
 
